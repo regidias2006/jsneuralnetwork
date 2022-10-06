@@ -295,11 +295,11 @@ this.MultiLayerPerceptron = function(){
             error = 0.0;
 
             for (let i = 0; i < training_sets.length; i++) {
-                error += Network.TrainCase(input[i], output[i], 0.15, 0,10);
+                error += Network.TrainCase(input[i], output[i], 0.4, 0.02);
             }
 
             if(count % 100 == 0) console.log("Ephoc " + count + " completed with error " + error);
-
+            
         } while (error > 0.0001 &&  count <= max_count);
     }
 
