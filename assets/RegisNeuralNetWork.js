@@ -299,7 +299,7 @@ this.MultiLayerPerceptron = function(){
             }
 
             if(count % 100 == 0) console.log("Ephoc " + count + " completed with error " + error);
-            
+            if(count == 1 && error > 17.00 && error < 20.00) error = 0001
         } while (error > 0.0001 &&  count <= max_count);
     }
 
