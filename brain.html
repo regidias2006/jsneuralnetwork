@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>MultiLayer Perceptron</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="//unpkg.com/brain.js"></script>
+    </head>
+
+    <body>
+        <textarea id="json" style="width: 700px; height: 400px;"></textarea>
+        <script>
+            // provide optional config object (or undefined). Defaults shown.
+            const config = {
+            inputSize: 33,
+            binaryThresh: 0.5,
+            hiddenLayers: [50, 50, 50], // array of ints for the sizes of the hidden layers in the network
+            activation: 'sigmoid', // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
+            leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
+            };
+
+            // create a simple feed forward neural network with backpropagation
+            const net = new brain.NeuralNetwork(config);
+
+            net.train([
+            { input: [232, 0, 2, 1.15, 3, 10, 34, 1, 1, 9.2, 21, 1, 1, 4.5, 7, 1, 1, 2, 2, 1.11, 3, 10.76, 51, 0, 0.2, 0, 0.217391304347826, 0, 0.444444444444444, 0, 0, 0.90, 1], output: [1] },
+            { input: [222, 1, 0, 1.04, 2, 11.42, 32, 1, 1, 8.8, 16, 1, 1, 9, 9, 1, 1, 2, 2, 1.07, 2, 10.91, 50, 0.961538461538461, 0, 0, 0, 0, 0, 0, 0, 0.90, 1], output: [1] },
+            { input: [268, 0, 20, 1.19, 2, 12.5, 57, 1.25, 2, 9, 20, 0, 0, 10, 10, 0, 0, 3, 3, 1.11, 3, 9.25, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0.90, 1], output: [1] },
+            { input: [265, 0, 7, 1.14, 2, 9.24, 35, 1, 1, 5.38, 10, 1, 1, 4.5, 7, 0, 0, 3, 3, 1.11, 3, 9.38, 64, 0, 0.757575757575758, 0, 0, 0, 0, 0, 0, 0.90, 1], output: [1] },
+            { input: [289, 0, 1, 1.09, 2, 7.76, 29, 1.2, 2, 8.8, 22, 1, 1, 4, 7, 1, 1, 1, 1, 1.12, 3, 8.57, 41, 0, 0.128865979381443, 0, 0.113636363636364, 0, 0.25, 0, 0, 0.90, 1], output: [1] },
+            { input: [237, 0, 8, 1.1, 2, 8.61, 39, 1, 1, 9.2, 23, 1, 1, 4.5, 8, 0, 0, 3, 3, 1.09, 3, 10.4, 64, 0, 0.929152148664344, 0, 0.869565217391304, 0, 0, 0, 0, 0.90, 1], output: [1] },
+            { input: [236, 0, 19, 1.11, 2, 7.25, 25, 1, 1, 9.2, 19, 0, 0, 10, 10, 0, 0, 3, 3, 1.12, 3, 10.8, 53, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0], output: [0] },
+            { input: [255, 0, 39, 1.07, 2, 9.68, 39, 1, 1, 16, 39, 0, 0, 10, 10, 0, 0, 3, 3, 1.12, 2, 9.91, 61, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0], output: [0] },
+            { input: [257, 0, 1, 1.1, 2, 8.61, 38, 1.33, 2, 6, 13, 1.5, 2, 2.33, 5, 1, 1, 1, 1, 1.12, 3, 9.82, 60, 0, 0.116144018583043, 0, 0.166666666666667, 0, 0.429184549356223, 0, 0, 5, 0], output: [0] },
+            { input: [238, 0, 5, 1.15, 2, 10, 30, 1, 1, 11.75, 19, 1, 1, 4.5, 5, 0, 0, 3, 3, 1.13, 3, 10.84, 60, 0, 0.5, 0, 0.425531914893617, 0, 0, 0, 0, 6, 0], output: [0] },
+            { input: [243, 1, 0, 1.05, 2, 13.24, 49, 1.25, 2, 11.25, 22, 1, 1, 9, 9, 1, 1, 2, 2, 1.09, 3, 10.19, 49, 0.952380952380952, 0, 0.8, 0, 0, 0, 0, 0, 10, 0], output: [0] },
+            { input: [252, 1, 0, 1.09, 2, 12.5, 37, 1, 1, 15.67, 26, 1, 1, 9, 9, 1, 1, 2, 2, 1.13, 4, 10.11, 58, 0.91743119266055, 0, 0, 0, 0, 0, 0, 0, 12, 0], output: [0] },
+            { input: [277, 1, 0, 1.03, 2, 8.65, 26, 1, 1, 5.25, 12, 1, 1, 4, 6, 1, 1, 2, 2, 1.13, 3, 9.1, 46, 0.970873786407767, 0, 0, 0, 0, 0, 0, 0, 20, 0], output: [0] },
+            { input: [269, 0, 6, 1.16, 2, 10.42, 46, 1.25, 2, 9, 12, 1, 1, 4.5, 6, 0, 0, 3, 3, 1.13, 3, 9.44, 55, 0, 0.575815738963532, 0, 0.666666666666667, 0, 0, 0, 0, 30, 0], output: [0] },
+
+
+
+            ]);
+
+            const json = net.toJSON();
+            net.fromJSON(json);
+
+            $("#json").val(JSON.stringify(json));
+
+            var output = net.run([236, 0, 19, 1.11, 2, 7.25, 25, 1, 1, 9.2, 19, 0, 0, 10, 10, 0, 0, 3, 3, 1.12, 3, 10.8, 53, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0]); // [0.987]
+            console.log(output[0])
+
+            output = net.run([268, 0, 20, 1.19, 2, 12.5, 57, 1.25, 2, 9, 20, 0, 0, 10, 10, 0, 0, 3, 3, 1.11, 3, 9.25, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // [0.987]
+            console.log(output[0])
+
+        </script>
+    </body>
+</html>
